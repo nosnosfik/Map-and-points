@@ -19,6 +19,7 @@ class MainVC: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextF
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var clearBtn: UIButton!
+    @IBOutlet weak var startBtn: UIButton!
     
     let locationManager = CLLocationManager()
     var pointsArray:Array<Point> = []
@@ -31,16 +32,11 @@ class MainVC: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextF
 
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        
-        startLocation.delegate = self
-        finishLocation.delegate = self
-        
-        pointsTableView.delegate = self
-        pointsTableView.dataSource = self
-        
+
         saveBtn.backgroundColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 0.4)
         clearBtn.backgroundColor = UIColor(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 0.4)
-
+        
+        addBtn.isEnabled = false
         mapView.addSubview(saveBtn)
         mapView.addSubview(clearBtn)
 
@@ -71,8 +67,8 @@ class MainVC: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextF
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let title = UILabel()
-        title.font = UIFont(name: "Futura", size: 15)!
-        title.textColor = UIColor.lightGray
+        title.font = UIFont.systemFont(ofSize: 14)
+        title.textColor = UIColor.darkGray
         view.tintColor = UIColor.white
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font=title.font
@@ -97,6 +93,10 @@ class MainVC: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextF
         path = SimplePath(name: "Path", path:[])
         startLocation.text = ""
         finishLocation.text = ""
+        startBtn.isEnabled = true
+        addBtn.isEnabled = true
+        startLocation.isEnabled = true
+        finishLocation.isEnabled = true
         pointsTableView.reloadData()
         
     }
@@ -125,23 +125,46 @@ class MainVC: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextF
         }, failure: { (Error) in
             print(Error)
             })
+        startBtn.isEnabled = false
+        addBtn.isEnabled = false
+        PathArray().saveDataRealm(data: pointsArray)
+       
     }
     
+    @IBAction func unwind(fromModalViewController segue: UIStoryboardSegue) {
+
+                        self.pointsTableView.reloadData()
+        Polyliner().getDataFromServer(withData: pointsArray, completion: { (JSON) in
+            Polyliner().drawPolyline(data: JSON, map: self.mapView)
+            Polyliner().makeWrooomAndHustle(coordsArray:Polyliner().getCoordsFromEncString(data: JSON) as! Array<[CLLocationCoordinate2D]>,map: self.mapView)
+            Marker().placeMarkers(pointsArray: self.pointsArray, map: self.mapView)
+        }, failure: { (Error) in
+            print(Error)
+        })
+        startBtn.isEnabled = false
+        addBtn.isEnabled = false
+    }
 }
+
+
 
 extension MainVC: GMSAutocompleteViewControllerDelegate {
  
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        currentTextField?.text = place.name
+        currentTextField?.text = place.formattedAddress!
         if pointsArray.count < 5 {
             let marker = Marker()
             marker.addMarkerPoint(marker: marker, place: place, map: mapView)
-            let point = Point(name: place.name, placeID: place.placeID, coords: place.coordinate,marker: marker)
+            let point = Point(name: place.formattedAddress!, placeID: place.placeID, coords: place.coordinate,marker: marker)
             pointsArray = SimplePath(name: place.name, path: pointsArray).addPointToArray(point: point)
             cameraBounds().bounds(pointArray: pointsArray, map: mapView)
             wpArray = Array(pointsArray.dropFirst(2))
+            if pointsArray.count > 1 {
+                addBtn.isEnabled = true
+            }
             pointsTableView.reloadData()
         }
+        currentTextField?.isEnabled = false
         self.dismiss(animated: true, completion: nil)
     }
     

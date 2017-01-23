@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6E3F20D4C473476075E2D2C8 /* Pods_Map_and_points.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC5E747998C673FEDC9AE55 /* Pods_Map_and_points.framework */; };
+		C61873381E35FFD6007F2AE2 /* SavedDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61873371E35FFD6007F2AE2 /* SavedDataVC.swift */; };
+		C618733A1E3609E8007F2AE2 /* SavedDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61873391E3609E8007F2AE2 /* SavedDataCell.swift */; };
+		C618733D1E363CFC007F2AE2 /* PathData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C618733C1E363CFC007F2AE2 /* PathData.swift */; };
 		C62879301E2D2ACA0016DD69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C628792F1E2D2ACA0016DD69 /* AppDelegate.swift */; };
 		C62879321E2D2ACA0016DD69 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62879311E2D2ACA0016DD69 /* MainVC.swift */; };
 		C62879351E2D2ACA0016DD69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C62879331E2D2ACA0016DD69 /* Main.storyboard */; };
@@ -25,6 +28,9 @@
 		8BC5E747998C673FEDC9AE55 /* Pods_Map_and_points.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Map_and_points.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A7D91B150BEC4EA8D2D4768 /* Pods-Map-and-points.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map-and-points.release.xcconfig"; path = "Pods/Target Support Files/Pods-Map-and-points/Pods-Map-and-points.release.xcconfig"; sourceTree = "<group>"; };
 		BC5907F1BC4B3F66750C85EE /* Pods-Map-and-points.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Map-and-points.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Map-and-points/Pods-Map-and-points.debug.xcconfig"; sourceTree = "<group>"; };
+		C61873371E35FFD6007F2AE2 /* SavedDataVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataVC.swift; sourceTree = "<group>"; };
+		C61873391E3609E8007F2AE2 /* SavedDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataCell.swift; sourceTree = "<group>"; };
+		C618733C1E363CFC007F2AE2 /* PathData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathData.swift; sourceTree = "<group>"; };
 		C628792C1E2D2ACA0016DD69 /* Map-and-points.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Map-and-points.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C628792F1E2D2ACA0016DD69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C62879311E2D2ACA0016DD69 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
@@ -71,6 +77,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C618733B1E363CD7007F2AE2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C618733C1E363CFC007F2AE2 /* PathData.swift */,
+				C6A3EBEB1E2D78FB0080B692 /* RoadPath.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		C62879231E2D2AC90016DD69 = {
 			isa = PBXGroup;
 			children = (
@@ -92,10 +107,11 @@
 		C628792E1E2D2ACA0016DD69 /* Map-and-points */ = {
 			isa = PBXGroup;
 			children = (
+				C618733B1E363CD7007F2AE2 /* Model */,
 				C663AF711E3555FF0008361B /* View */,
 				C628792F1E2D2ACA0016DD69 /* AppDelegate.swift */,
 				C62879311E2D2ACA0016DD69 /* MainVC.swift */,
-				C6A3EBEB1E2D78FB0080B692 /* RoadPath.swift */,
+				C61873371E35FFD6007F2AE2 /* SavedDataVC.swift */,
 				C645391A1E2FD2AC00E0530F /* MapWork.swift */,
 				C62879331E2D2ACA0016DD69 /* Main.storyboard */,
 				C62879361E2D2ACA0016DD69 /* Assets.xcassets */,
@@ -111,6 +127,7 @@
 				C663AF6F1E3549300008361B /* ShadowsRoundings.swift */,
 				C663AF741E3597650008361B /* TextInset.swift */,
 				C663AF721E35562D0008361B /* PlacesCell.swift */,
+				C61873391E3609E8007F2AE2 /* SavedDataCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -241,10 +258,13 @@
 			files = (
 				C645391B1E2FD2AC00E0530F /* MapWork.swift in Sources */,
 				C663AF701E3549300008361B /* ShadowsRoundings.swift in Sources */,
+				C61873381E35FFD6007F2AE2 /* SavedDataVC.swift in Sources */,
 				C62879321E2D2ACA0016DD69 /* MainVC.swift in Sources */,
 				C663AF751E3597650008361B /* TextInset.swift in Sources */,
 				C663AF731E35562D0008361B /* PlacesCell.swift in Sources */,
+				C618733D1E363CFC007F2AE2 /* PathData.swift in Sources */,
 				C6A3EBEC1E2D78FB0080B692 /* RoadPath.swift in Sources */,
+				C618733A1E3609E8007F2AE2 /* SavedDataCell.swift in Sources */,
 				C62879301E2D2ACA0016DD69 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +386,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BC5907F1BC4B3F66750C85EE /* Pods-Map-and-points.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = B443JKWG7Y;
 				INFOPLIST_FILE = "Map-and-points/Info.plist";
@@ -380,6 +401,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9A7D91B150BEC4EA8D2D4768 /* Pods-Map-and-points.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = B443JKWG7Y;
 				INFOPLIST_FILE = "Map-and-points/Info.plist";

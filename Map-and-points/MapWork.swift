@@ -8,6 +8,7 @@
 
 import GoogleMaps
 import Alamofire
+import CoreLocation
 import GooglePlaces
 
 class Marker:GMSMarker {
@@ -21,6 +22,13 @@ class Marker:GMSMarker {
             marker.title = place.name
             marker.position = place.coordinate
             marker.map = map
+    }
+    
+    func createMarker(name:String,coords: CLLocationCoordinate2D) -> Marker{
+        let marker = Marker()
+        marker.title = name
+        marker.position = coords
+        return marker
     }
     
     func placeMarkers(pointsArray:Array<Point>,map:GMSMapView){
